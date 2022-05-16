@@ -25,6 +25,7 @@ func Map(input *monstachemap.MapperPluginInput) (output *monstachemap.MapperPlug
 	log.Info("getting ticket Id")
 	ticket := input.Document
 
+	log.Info("this is the ticket: ", ticket, fmt.Sprintf("%T", ticket))
 	ticketId, ok := ticket["id"].(string)
 	if !ok {
 		log.Error("ticketId not of type string")
