@@ -58,7 +58,7 @@ func Map(input *monstachemap.MapperPluginInput) (output *monstachemap.MapperPlug
 	}
 
 	logger = logger.WithFields(log.Fields{
-		"ticketId":  objId.Hex(),
+		"ticketId":  ticketId.Hex(),
 		"companyId": company_id.Hex(),
 		"userId":    userId.Hex(),
 	})
