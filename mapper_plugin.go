@@ -26,19 +26,16 @@ func Map(input *monstachemap.MapperPluginInput) (output *monstachemap.MapperPlug
 	ticket := input.Document
 
 	log.Info("this is the ticket: ", ticket, fmt.Sprintf("%T", ticket))
-	ticketId, ok := ticket["id"].(string)
+	ticketId, ok := ticket["ticketId"].(primitive.ObjectID)
 	if !ok {
-		log.Error("ticketId not of type string")
-		return nil, fmt.Errorf("ticketId not of type string")
+		log.Error("ticketId is not an ObjectID")
+		return nil, fmt.Errorf("ticketId is not an ObjectID")
 	}
-	objId, err := primitive.ObjectIDFromHex(ticketId)
-	if err != nil {
-		log.Error(err)
-		return nil, fmt.Errorf("error converting string to ObjectID")
-	}
-	logger := log.WithField("ticketId", objId.Hex())
+
+	logger := log.WithField("ticketId", ticketId)
+
 	collection := client.Database("supportgenie_test").Collection("ticket")
-	err = collection.FindOne(ctx, bson.D{{"ticketId", objId}}).Decode(&ticket)
+	err = collection.FindOne(ctx, bson.D{{"ticketId", ticketId}}).Decode(&ticket)
 	if err != nil || len(ticket) == 0 {
 		logger.Error("ticket not found", err)
 		return nil, fmt.Errorf("ticket not found")
