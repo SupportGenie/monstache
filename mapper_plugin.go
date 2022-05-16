@@ -23,12 +23,8 @@ func Map(input *monstachemap.MapperPluginInput) (output *monstachemap.MapperPlug
 
 	log.Info("inside prepare function")
 	log.Info("getting ticket Id")
-	var ticket map[string]interface{}
-	ticket, ok := input.Document["ticketId"].(map[string]interface{})
-	if !ok {
-		log.Error("ticket not of type map[string]interface{}")
-		return nil, fmt.Errorf("ticket not of type map[string]interface{}")
-	}
+	ticket := input.Document
+
 	ticketId, ok := ticket["id"].(string)
 	if !ok {
 		log.Error("ticketId not of type string")
