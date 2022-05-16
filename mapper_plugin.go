@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func Process(input *monstachemap.MapperPluginInput) (output *monstachemap.MapperPluginOutput, err error) {
+func Map(input *monstachemap.MapperPluginInput) (output *monstachemap.MapperPluginOutput, err error) {
 	client := input.MongoClient
 	ctx := context.TODO()
 
