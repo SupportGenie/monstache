@@ -8,9 +8,9 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY . .
-
 RUN go mod download
+
+COPY . .
 
 RUN make release
 
